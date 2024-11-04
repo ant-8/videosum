@@ -110,6 +110,7 @@ def get_key_frames_inception(self, input_path, eps=1e-6, time_smoothing=0.,
     # Retrieve the video frames corresponding to the cluster means
     print('[INFO] Retrieving key frames ...')
     key_frames = []
+    key_indices = []
     reader = videosum.VideoReader(input_path, sampling_rate=self.fps, 
                                   pix_fmt='rgb24')
     counter = 0
@@ -121,11 +122,12 @@ def get_key_frames_inception(self, input_path, eps=1e-6, time_smoothing=0.,
 
             # Add key frame to list
             key_frames.append(im)
+            key_indices.append(counter)
             
         counter += 1
     print('[INFO] Key frames obtained.')
 
-    return key_frames
+    return key_indices, key_frames
 
 
 if __name__ == '__main__':
